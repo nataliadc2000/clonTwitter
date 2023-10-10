@@ -1,9 +1,12 @@
 <?php
-    require_once("connection/connection.php");
+    require_once("../connection/connection.php");
   
 ?>
-   <!DOCTYPE html>
- <head>
+
+<!DOCTYPE html>
+<!-- Para cambiar de modo oscuro "dark" a modo normal, simplemente cambiarlo por "light"-->
+
+<head>
 
     <meta charset="UTF-8">
     <meta name="description" content="Este es mi portfolio personal">
@@ -39,49 +42,66 @@
     <title>Tu nombre's portfolio</title>
 
 </head>
- <body>
- <div id="login" class="container"> 
-    <?php if(isset($_SESSION["error_login"])){
-            var_dump($_SESSION["error_login"]);
+
+<body>
+    <div id="contact" class="container">
+        <?php if(isset($_SESSION["errores"])){
+            var_dump($_SESSION["errores"]);
         }
         
         ?>
-        <form action="login/login.php" method="POST" class="mt-2 mx-auto">
+
+        <?php if(isset($_SESSION["completado"])){
+            echo "Registro completado";
+        }
+        
+        ?>
+        <form action="./registro.php" method="POST" class="mt-2 mx-auto">
             <fieldset class="form-row reset p-4 align-items-center border border-primary ">
-                <legend class="reset text-primary border border-primary px-2 py-1">Login</legend>
+                <legend class="reset text-primary border border-primary px-2 py-1">Registrate</legend>
 
                 <div class="form-group row g-3 mt-1 mx-auto">
-                    <label for="username" class="col-sm-2 col-form-label text-primary">username:</label>
-                    <div class="col input-group mb-2">
-                        
-                        <input type="text" id="username" class="form-control text-info" name="username" />
+                    <label for="username" class="col-sm-2 col-form-label text-primary">Username:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="username" class="form-control text-info" name="username" required />
                     </div>
                 </div>
 
                 <div class="form-group row g-3 mt-1 mx-auto">
-                    <label for="pass" class="col-sm-2 col-form-label text-primary">Password:</label>
+                    <label for="mail" class="col-sm-2 col-form-label text-primary">mail:</label>
+                    <div class="col input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                          </div>
+                        <input type="email" id="mail" class="form-control text-info" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+                    </div>
+                </div>
+
+                <div class="form-group row g-3 mt-1 mx-auto">
+                    <label for="password" class="col-sm-2 col-form-label text-primary">Password:</label>
                     <div class="col-sm-10">
-                        <input type="password" id="pass" class="form-control text-info" name="pass" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                        <input type="password" id="password" class="form-control text-info" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                             title="Debe contener al menos un número y una mayúscula y una minúscula, y al menos 8 o más carácteres"/>
                     </div>
                 </div>
-                <div class="row g-3 mt-2 2-25 mx-auto">
-                    <a href="registro/formRegistro.php">
-                        Aun no estas registrado? REGISTRATE YA!
-                    </a>
+               
+                <div class="row g-3 mt-2 mx-auto">
+                    <label class="form-label text-primary" for="desc">Description:</label>
+                    <textarea name="desc" id="desc" cols="40" rows="5"
+                    class="form-control text-info mt-2 w-10"
+                    required="" placeholder="Aqui va el cuerpo del mensaje..."></textarea>
                 </div>
+
                 <div class="row g-3 mt-2 w-25 mx-auto">
-                    <input id="sendBttn2" class="btn btn-primary btn-lg" type="submit" value="Send" name="submit"/>
+                    <input id="sendBttn" class="btn btn-primary btn-lg" type="submit" value="Send" name="submit"/>
                 </div>
             </fieldset>
         </form>
     </div>
+
     <?php 
-        if(isset($_SESSION["error_login"])){
-            $_SESSION["error_login"] = null;
-            session_unset($_SESSION["error_login"]);
+        if(isset($_SESSION["errores"])){
+            $_SESSION["errores"] = null;
+            session_unset($_SESSION["errores"]);
         }
     ?>
- </body>
- </html>
-    
