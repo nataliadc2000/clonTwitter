@@ -1,5 +1,4 @@
 <?php 
-include "../logger/logger.php";
 if (isset($_POST["submit"])) {
     require_once("../connection/connection.php");
     #session_start();
