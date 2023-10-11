@@ -1,5 +1,5 @@
 <?php
-    require_once("../connection/connection.php");
+ include_once("../connection/connection.php");
   
 ?>
 
@@ -30,10 +30,6 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"
         defer></script>
 
-    <!-- My css -->
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <!-- My scripts -->
-    <script type="text/javascript" src="js/app.js" defer></script>
 
     <!-- Icono al lado del titulo -->
     <link rel="shortcut icon" href="media/icon/favicon.png" type="image/xpng">
@@ -56,7 +52,7 @@
         }
         
         ?>
-        <form action="./registro.php" method="POST" class="mt-2 mx-auto">
+        <form action="registro.php" method="POST" class="mt-2 mx-auto">
             <fieldset class="form-row reset p-4 align-items-center border border-primary ">
                 <legend class="reset text-primary border border-primary px-2 py-1">Registrate</legend>
 
@@ -78,16 +74,16 @@
                 </div>
 
                 <div class="form-group row g-3 mt-1 mx-auto">
-                    <label for="password" class="col-sm-2 col-form-label text-primary">Password:</label>
+                    <label for="pass" class="col-sm-2 col-form-label text-primary">pass:</label>
                     <div class="col-sm-10">
-                        <input type="password" id="password" class="form-control text-info" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                        <input type="password" id="pass" class="form-control text-info" name="pass" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                             title="Debe contener al menos un número y una mayúscula y una minúscula, y al menos 8 o más carácteres"/>
                     </div>
                 </div>
                
                 <div class="row g-3 mt-2 mx-auto">
-                    <label class="form-label text-primary" for="desc">Description:</label>
-                    <textarea name="desc" id="desc" cols="40" rows="5"
+                    <label class="form-label text-primary" for="description">Description:</label>
+                    <textarea name="description" id="description" cols="40" rows="5"
                     class="form-control text-info mt-2 w-10"
                     required="" placeholder="Aqui va el cuerpo del mensaje..."></textarea>
                 </div>

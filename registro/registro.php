@@ -9,11 +9,7 @@ if (isset($_POST["submit"])) {
     $pass = isset($_POST["pass"]) ? mysqli_real_escape_string($connect, $_POST["pass"]) : false;
     $descr = isset($_POST["description"]) ? mysqli_real_escape_string($connect, trim($_POST["description"])) : false;
     //var_dump($_POST);
-
-    $sql = "SELECT COUNT(*) FROM usuarios where mail = '$mail'";
     $arrayErrores = array();
-    $res = mysqli_query($connect,$sql);
-    
     //Hacemos validadores necesarios
     if (!empty($username) && !is_numeric($username)) {
         $usernameValidado = true;
@@ -33,7 +29,7 @@ if (isset($_POST["submit"])) {
         $passValidado = true;
     } else {
         $passValidado = false;
-        $arrayErrores["password"] = "El password no es valido";
+        $arrayErrores["pass"] = "El password no es valido";
     }
 
     
@@ -51,17 +47,20 @@ if (isset($_POST["submit"])) {
         $passSegura = password_hash($pass, PASSWORD_BCRYPT, ["cost" => 4]);
         //password_verify($pass, $passSegura);
 
-        $sql = "INSERT INTO usuarios VALUES(null, '$username', '$mail', '$passSegura',$descr, CURDATE());";
+        $sql = "INSERT INTO usuarios VALUES(null, '$username', '$mail', '$passSegura','$descr')";
         $guardar = mysqli_query($connect, $sql);
 
         if ($guardar) {
             $_SESSION["completado"] = "Registro completado";
+            header("Location: ../index.php");
         } else {
             $_SESSION["errores"]["general"] = "Fallo en el registro";
+            echo "aaaaaaaaaaaa";
         }
     } else {
         $_SESSION["errores"] = $arrayErrores;
+        var_dump($arrayErrores);
     }
-    header("Location: ../index.php");
+    
 }
 ?>

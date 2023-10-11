@@ -1,5 +1,5 @@
 <?php 
-    require_once "../connection/connection.php";
+ include_once("../connection/connection.php");
 
     if (isset($_POST)) {
         $nombre =$_POST["username"];
@@ -13,8 +13,8 @@
         $usuario = mysqli_fetch_assoc($res);
 
         if (password_verify($pass, $usuario["pass"])) {
-            $_SESSION["usuario"] = $usuario;
-            header("Location:../cartas.php");
+            $_SESSION["usuarios"] = $usuario;
+            header("Location:../paginaPrincipal.php");
         } else {
             $_SESSION["error_login"] = "Login incorrecto";
             header("Location: ../index.php");

@@ -1,5 +1,5 @@
 <?php
-    require_once("connection/connection.php");
+ include_once("./connection/connection.php");
   
 ?>
    <!DOCTYPE html>
@@ -29,9 +29,6 @@
 
     <!-- My css -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <!-- My scripts -->
-    <script type="text/javascript" src="js/app.js" defer></script>
-
     <!-- Icono al lado del titulo -->
     <link rel="shortcut icon" href="media/icon/favicon.png" type="image/xpng">
 
