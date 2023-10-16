@@ -3,6 +3,7 @@
  include_once("./connection/connection.php");
     $id = 3;
  $sql = "SELECT * from usuarios where usuarios.id= $id";
+  $sqlPublication = "SELECT * FROM publications where publications.userId=$id";
   $query = mysqli_query($connect,$sql);
   $row = mysqli_fetch_array($query);
 ?>
