@@ -8,7 +8,7 @@ CREATE TABLE `twitter`.`usuarios` (
   PRIMARY KEY (`id`));
 
 CREATE table `twitter`.`publications` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL ,
   `userId` INT NOT NULL,
   `text` LONGTEXT NOT NULL,
   `createDate` Date NOT NULL,

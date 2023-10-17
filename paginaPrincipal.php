@@ -1,9 +1,9 @@
 <?php
  include_once("./connection/connection.php");
+ session_start();
 
- $sql = "SELECT * from usuarios where usuarios.id= 3";
-  $query = mysqli_query($connect,$sql);
-  $row = mysqli_fetch_array($query);
+ $sql = "SELECT * FROM publications ";
+ $guardar = mysqli_query($connect,$sql);
 ?>
    <!DOCTYPE html>
  <head>
@@ -39,7 +39,9 @@
 
 </head>
  <body>
-  
+  <?php 
+  var_dump($_SESSION["usuarios"]);
+  if(isset($_SESSION["usuarios"])): ?>
  <nav class="navbar navbar navbar-dark bg-info" style="height: 10vh;"> 
     <a class="navbar-brand mx-2">Vedruitter</a> 
     <a class="nav-link text-white" href="?q=a">All</a> 
@@ -49,13 +51,14 @@
    </form> 
 </nav>
 <div class="container-fluid d-flex justify-content-center pt-5" id="subBody" style="min-height: 90vh;">
-    <div class="container">
+   
+<div class="container">
+  
         <div class="card mb-3">
         <form class="mt-2" action="publicar.php" method="POST">
             <div class="card-body">     
-              <h5 class="card-title"><?= $row["username"] ?></h5>
-              <p class="card-text">prueba</p>
-              <p class="card-text"><small class="text-muted">Created 2023-10-11</small></p>
+              <h5 class="card-title"><?= $_SESSION["usuarios"]['username'] ?></h5>
+              <p class="card-text"><?= $_SESSION["usuarios"]['description'] ?></p>
             </div>
 
         
@@ -68,20 +71,26 @@
 
         </div> 
     </div>
-    <div class="container">
-              <div class="card mb-3">
+    
+   <div class="container">
+      <?php while($row = mysqli_fetch_array($guardar)):?>
+       
+        <div class="card mb-3" style="colspan:2">
             <div class="card-body">
               <div class="d-flex gap-2">
-                <h5 class="card-title"><a href="./user.php?u=16"><?= $row["username"] ?></a></h5>
-                <a href="./follow.php?id=16">Follow</a>
-                <a href="./unfollow.php?id=16">Unfollow</a>
+                <h5 class="card-title"><a href="./user.php?u=<?= $_SESSION["usuarios"]['id'] ?>"><?= $_SESSION["usuarios"]['username'] ?></a></h5>
+                <a href="./follow.php?id=<?= $_SESSION["usuarios"]['id'] ?>">Follow</a>
+                <a href="./unfollow.php?id=<?= $_SESSION["usuarios"]['id'] ?>">Unfollow</a>
               </div>
-              <p class="card-text">ejemplo de mi primer tweet</p>
-              <p class="card-text"><small class="text-muted">Created 2023-10-11</small></p>
+              <p class="card-text"><?= $row["text"] ?></p>
+              <p class="card-text"><small class="text-muted">Created <?= $row["createDate"] ?> </small></p>
             </div>
+            <br>
         </div> 
-          </div>
-  </div>
+      
+        <?php endwhile; ?>
+        </div>
+  <?php endif; ?>
  </body>
  </html>
     

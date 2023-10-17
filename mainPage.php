@@ -1,11 +1,7 @@
 
 <?php
  include_once("./connection/connection.php");
-    $id = 3;
- $sql = "SELECT * from usuarios where usuarios.id= $id";
-  $sqlPublication = "SELECT * FROM publications where publications.userId=$id";
-  $query = mysqli_query($connect,$sql);
-  $row = mysqli_fetch_array($query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en"><head>
@@ -40,6 +36,7 @@
 </head>
 
 <body>
+  <?php if(isset($_SESSION["usuarios"])): ?>
   <nav class="navbar navbar navbar-dark bg-info" style="height: 10vh;">
     <a class="navbar-brand mx-2">Vedruitter</a>
     <a class="nav-link text-white" href="?q=a">All</a>
@@ -53,9 +50,9 @@
     <div class="container">
         <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title"><?= $row["username"] ?></h5>
-              <p class="card-text">prueba</p>
-              <p class="card-text"><small class="text-muted">Created 2023-10-11</small></p>
+              <h5 class="card-title"><?= $_SESSION["usuarios"]['$username'] ?></h5>
+              <p class="card-text"><?= $_SESSION["usuarios"]['text'] ?></p>
+              <p class="card-text"><small class="text-muted"><?= $_SESSION["usuarios"]['createDate'] ?></small></p>
             </div>
 
         <form class="mt-2" action="publicar.php" method="POST">
@@ -83,6 +80,6 @@
           </div>
   
   </div>
-
+    <?php endif; ?>
 
 </body></html>
