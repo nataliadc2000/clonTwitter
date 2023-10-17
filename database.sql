@@ -18,7 +18,5 @@ CREATE table `twitter`.`publications` (
 CREATE TABLE `twitter`.`follows` (
   `users_id` INT NOT NULL ,
   `userToFollowId` INT NOT NULL ,
-  PRIMARY KEY (`users_id`),
-  PRIMARY KEY (`userToFollowId`),
-  FOREIGN KEY (`users_id`) REFERENCES users(`id`)
+  FOREIGN KEY (`users_id`) REFERENCES usuarios(`id`)
 );
