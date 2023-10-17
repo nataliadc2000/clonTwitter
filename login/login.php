@@ -1,6 +1,6 @@
 <?php 
  include_once("../connection/connection.php");
-
+ session_start();
     if (isset($_POST)) {
         $nombre =$_POST["username"];
         $pass = $_POST["pass"];
@@ -14,6 +14,7 @@
 
         if (password_verify($pass, $usuario["pass"])) {
             $_SESSION["usuarios"] = $usuario;
+            
             header("Location:../paginaPrincipal.php");
         } else {
             $_SESSION["error_login"] = "Login incorrecto";

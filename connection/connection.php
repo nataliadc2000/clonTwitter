@@ -12,6 +12,6 @@
 
     return $connect;
 
-session_start();
+
 
 ?>

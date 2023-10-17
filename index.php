@@ -1,6 +1,6 @@
 <?php
  include_once("./connection/connection.php");
-  
+ session_start();
 ?>
    <!DOCTYPE html>
  <head>
