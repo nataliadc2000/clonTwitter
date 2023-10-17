@@ -1,6 +1,10 @@
 
 <?php
  include_once("./connection/connection.php");
+ session_start();
+
+ $sql = "SELECT * FROM publications ";
+ $guardar = mysqli_query($connect,$sql);
 
 ?>
 <!DOCTYPE html>
@@ -37,47 +41,54 @@
 
 <body>
   <?php if(isset($_SESSION["usuarios"])): ?>
-  <nav class="navbar navbar navbar-dark bg-info" style="height: 10vh;">
-    <a class="navbar-brand mx-2">Vedruitter</a>
-    <a class="nav-link text-white" href="?q=a">All</a>
-    <a class="nav-link text-white" href="./mainPage.php">Follow</a>
+
+    <nav class="navbar navbar navbar-dark bg-info" style="height: 10vh;"> 
+    <a class="navbar-brand mx-2">Vedruitter</a> 
+    <a class="nav-link text-white" href="?q=a">All</a> 
+    <a class="nav-link text-white" href="./mainPage.php?id=<?= $_SESSION["usuarios"]['id'] ?>">Follow</a>
     <form class="form-inline" action="../login/logout.php">
-    <input class="btn btn-primary btn-lg" type="submit" value="LOGOUT">
-                    
-    </form>
-  </nav>
-  <div class="container-fluid d-flex justify-content-center pt-5" id="subBody" style="min-height: 90vh;">
+           <input class="btn btn-primary btn-lg" type="submit" value="LOGOUT">
+   </form> 
+</nav>
+    <div class="container-fluid d-flex justify-content-center pt-5" id="subBody" style="min-height: 90vh;">
     <div class="container">
-        <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title"><?= $_SESSION["usuarios"]['$username'] ?></h5>
-              <p class="card-text"><?= $_SESSION["usuarios"]['text'] ?></p>
-              <p class="card-text"><small class="text-muted"><?= $_SESSION["usuarios"]['createDate'] ?></small></p>
-            </div>
+  
+  <div class="card mb-3">
+  <form class="mt-2" action="publicar.php" method="POST">
+      <div class="card-body">     
+        <h5 class="card-title"><?= $_SESSION["usuarios"]['username'] ?></h5>
+        <p class="card-text"><?= $_SESSION["usuarios"]['description'] ?></p>
+      </div>
 
-        <form class="mt-2" action="publicar.php" method="POST">
-          <div class="row g-3 mt-2 mx-auto">
-            <label class="form-label text-primary" for="tweet">Tweet: </label> <br>
-            <textarea name="tweet" class="form-control text-info mt-2 w-10" id="tweet" required="" placeholder="Escribe el tweet..." rows="5" cols="40"></textarea>
-            <input name="submitTweet" class="btn btn-primary btn-lg" id="sendTweet" type="submit" value="Send">
-          </div>
-        </form>
-
-        </div> 
+  
+    <div class="row g-3 mt-2 mx-auto">
+      <label class="form-label text-primary" for="text">text: </label> <br>
+      <textarea name="text" class="form-control text-info mt-2 w-10" id="text" required="" placeholder="Escribe el text..." rows="5" cols="40"></textarea>
+      <input name="submitTweet" class="btn btn-primary btn-lg" id="sendTweet" type="submit" value="Send">
     </div>
+  </form>
+
+  </div> 
+</div>
+  
     <div class="container">
-              <div class="card mb-3">
+      <?php while($row = mysqli_fetch_array($guardar)):?>
+       
+        <div class="card mb-3" style="colspan:2">
             <div class="card-body">
               <div class="d-flex gap-2">
-                <h5 class="card-title"><a href="./user.php?u=16"><?= $row["username"] ?></a></h5>
-                <a href="./follow.php?id=16">Follow</a>
-                <a href="./unfollow.php?id=16">Unfollow</a>
+                <h5 class="card-title"><a href="./user.php?u=<?= $_SESSION["usuarios"]['id'] ?>"><?= $_SESSION["usuarios"]['username'] ?></a></h5>
+                <a href="./follow.php?id=<?= $_SESSION["usuarios"]['id'] ?>">Follow</a>
+                <a href="./unfollow.php?id=<?= $_SESSION["usuarios"]['id'] ?>">Unfollow</a>
               </div>
-              <p class="card-text">ejemplo de mi primer tweet</p>
-              <p class="card-text"><small class="text-muted">Created 2023-10-11</small></p>
+              <p class="card-text"><?= $row["text"] ?></p>
+              <p class="card-text"><small class="text-muted">Created <?= $row["createDate"] ?> </small></p>
             </div>
+            <br>
         </div> 
-          </div>
+      
+        <?php endwhile; ?>
+        </div>
   
   </div>
     <?php endif; ?>
