@@ -1,3 +1,9 @@
+
+
+<?php
+ include_once("./connection/connection.php");
+ session_start();
+?>
 <html lang="en"><head>
 
     <meta charset="UTF-8">
@@ -30,6 +36,7 @@
 </head>
 
 <body>
+<?php if(isset($_SESSION["usuarios"])): ?>
   <nav class="navbar navbar navbar-dark bg-info" style="height: 7vh;">
     <a class="navbar-brand mx-2">Vedruitter</a>
     <a class="nav-link text-white" href="?q=a">All</a>
@@ -44,7 +51,7 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="d-flex gap-2">
-                    <h5 class="card-title"><?= $row["username"] ?></h5>
+                    <h5 class="card-title"><?= $_SESSION["usuarios"]["username"] ?></h5>
                     <a href="./follow.php?id=16">Follow</a>
                     <a href="./unfollow.php?id=16">Unfollow</a>
                 </div>
@@ -64,5 +71,5 @@
   
   </div>
 
-
+<?php endif; ?>
 </body></html>
