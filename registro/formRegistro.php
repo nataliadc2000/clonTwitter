@@ -42,7 +42,6 @@
 <body>
     <div id="contact" class="container">
         <?php if(isset($_SESSION["errores"])){
-            var_dump($_SESSION["errores"]);
         }
         
         ?>

@@ -2,7 +2,8 @@
 <?php
  include_once("./connection/connection.php");
  session_start();
- $sql = "SELECT * FROM publications ";
+ $id = $_SESSION["usuarios"]["id"];
+ $sql = "SELECT * from twitter.publications p inner join twitter.follows f where p.userId = f.users_id and p.userId = $id ;";
  $guardar = mysqli_query($connect,$sql);
  ?>
 <!DOCTYPE html>
@@ -39,6 +40,7 @@
 
 <body>
   <?php if(isset($_SESSION["usuarios"])): ?>
+
     <nav class="navbar navbar navbar-dark bg-info" style="height: 10vh;"> 
     <a class="navbar-brand mx-2">Vedruitter</a> 
     <a class="nav-link text-white" href="?q=a">All</a> 

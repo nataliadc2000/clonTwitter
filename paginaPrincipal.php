@@ -40,7 +40,6 @@
 </head>
  <body>
   <?php 
-  var_dump($_SESSION["usuarios"]);
   if(isset($_SESSION["usuarios"])): ?>
  <nav class="navbar navbar navbar-dark bg-info" style="height: 10vh;"> 
     <a class="navbar-brand mx-2">Vedruitter</a> 
