@@ -5,8 +5,8 @@
    if(isset($_SESSION["usuarios"])){
     $id=$_GET['id'];
 
-    $idses=$_SESSION["usuarios"]['id'];
-    $sql="INSERT INTO follows VALUES ('$id','$idses');";
+   
+    $sql="DELETE FROM follows where users_id = $id";
     $query=mysqli_query($connect, $sql);
     header('Location:../mainFollows.php');
    }

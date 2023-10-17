@@ -39,7 +39,6 @@
  <body>
  <div id="login" class="container"> 
     <?php if(isset($_SESSION["error_login"])){
-            var_dump($_SESSION["error_login"]);
         }
         
         ?>

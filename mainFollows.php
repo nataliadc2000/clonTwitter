@@ -5,7 +5,6 @@
  $id = $_SESSION["usuarios"]["id"];
  $sql = "SELECT * from twitter.publications p inner join twitter.follows f where p.userId = f.users_id and p.userId = $id ;";
  $guardar = mysqli_query($connect,$sql);
- var_dump($sql);
  ?>
 <!DOCTYPE html>
 <html lang="en"><head>

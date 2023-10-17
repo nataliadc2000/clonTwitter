@@ -8,7 +8,6 @@ if (isset($_POST["submit"])) {
     $mail = isset($_POST["mail"]) ? mysqli_real_escape_string($connect, trim($_POST["mail"])) : false;
     $pass = isset($_POST["pass"]) ? mysqli_real_escape_string($connect, $_POST["pass"]) : false;
     $descr = isset($_POST["description"]) ? mysqli_real_escape_string($connect, trim($_POST["description"])) : false;
-    //var_dump($_POST);
     $arrayErrores = array();
     //Hacemos validadores necesarios
     if (!empty($username) && !is_numeric($username)) {
@@ -59,7 +58,6 @@ if (isset($_POST["submit"])) {
         }
     } else {
         $_SESSION["errores"] = $arrayErrores;
-        var_dump($arrayErrores);
     }
     
 }
