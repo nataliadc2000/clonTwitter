@@ -2,7 +2,7 @@
  include_once("./connection/connection.php");
  session_start();
 
- $sql = "SELECT * FROM publications ";
+ $sql = "SELECT * FROM twitter.publications p inner join twitter.usuarios u where p.userId = u.id ";
  $guardar = mysqli_query($connect,$sql);
 ?>
    <!DOCTYPE html>
@@ -77,9 +77,9 @@
         <div class="card mb-3" style="colspan:2">
             <div class="card-body">
               <div class="d-flex gap-2">
-                <h5 class="card-title"><a href="./user.php?u=<?= $_SESSION["usuarios"]['id'] ?>"><?= $_SESSION["usuarios"]['username'] ?></a></h5>
-                <a href="./follow.php?id=<?= $_SESSION["usuarios"]['id'] ?>">Follow</a>
-                <a href="./unfollow.php?id=<?= $_SESSION["usuarios"]['id'] ?>">Unfollow</a>
+                <h5 class="card-title"><a href="./user.php?u=<?= $row["id"] ?>"><?= $row["username"]?></a></h5>
+                <a href="./follow.php?id=<?= $row["id"] ?>">Follow</a>
+                <a href="./unfollow.php?id=<?= $row["id"] ?>">Unfollow</a>
               </div>
               <p class="card-text"><?= $row["text"] ?></p>
               <p class="card-text"><small class="text-muted">Created <?= $row["createDate"] ?> </small></p>
