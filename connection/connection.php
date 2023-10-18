@@ -4,7 +4,7 @@
     $user = "root";
     $pass = "root";
 
-    $bd = "proyecto_twitter";
+    $bd = "twitter";
 
     $connect=mysqli_connect($host, $user, $pass);
 
@@ -12,6 +12,6 @@
 
     return $connect;
 
-session_start();
+
 
 ?>

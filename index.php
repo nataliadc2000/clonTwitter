@@ -1,6 +1,6 @@
 <?php
-    require_once("connection/connection.php");
-  
+ include_once("./connection/connection.php");
+ session_start();
 ?>
    <!DOCTYPE html>
  <head>
@@ -29,9 +29,6 @@
 
     <!-- My css -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <!-- My scripts -->
-    <script type="text/javascript" src="js/app.js" defer></script>
-
     <!-- Icono al lado del titulo -->
     <link rel="shortcut icon" href="media/icon/favicon.png" type="image/xpng">
 
@@ -42,7 +39,6 @@
  <body>
  <div id="login" class="container"> 
     <?php if(isset($_SESSION["error_login"])){
-            var_dump($_SESSION["error_login"]);
         }
         
         ?>
